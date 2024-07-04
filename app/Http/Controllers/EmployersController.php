@@ -34,10 +34,10 @@ class EmployersController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
-        
+
         try {
             DB::beginTransaction();
-            
+
             if ($request->hasFile('Image')) {
                 $image = $request->file('Image');
                 $imageName = time() . '_' . $image->getClientOriginalName();
@@ -77,7 +77,7 @@ class EmployersController extends Controller
 
         try {
             DB::beginTransaction();
-            
+
             $employee = Employers::findOrFail($id);
 
             if ($request->hasFile('Image')) {

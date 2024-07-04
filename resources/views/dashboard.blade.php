@@ -58,9 +58,9 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Accueil</a>
+                    <a href="#" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Accueil</a>
                     <a href="/employee" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Employées</a>
-                    <a href="#" class="nav-item nav-link"><i class="fa fa-pills me-2"></i>Pharmacien</a>
+                    <a href="/pharmacie" class="nav-item nav-link"><i class="fa fa-pills me-2"></i>Pharmacie</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Historiques</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -96,110 +96,119 @@
                         </a>
                     </div>
 
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-bell me-lg-2"></i>
-                        <span class="d-none d-lg-inline-flex">Notification</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">Un commentaire</h6>
-                            <small>15 minutes</small>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notification</span>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Un commentaire</h6>
+                                <small>15 minutes</small>
+                            </a>
 
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item text-center">Afficer tous les Notification</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">Afficer tous les Notification</a>
+                        </div>
                     </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <img class="rounded-circle me-lg-2" src="img/user.jpg" alt=""
-                            style="width: 40px; height: 40px;">
-                        <span class="d-none d-lg-inline-flex">Benjamina</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">Mon Profil</a>
-                        <a href="#" class="dropdown-item">Se Déconnecter</a>
-                    </div>
-                </div>
-        </div>
-        </nav>
+                    <div class="nav-item dropdown">
+                    <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
 
-        <!-- Sale & Revenue Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="row g-4">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-bed fa-3x text-warning"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Chambre 1</p>
-                            <h6 class="mb-0">libre</h6>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-bed fa-3x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Chambre 1</p>
+                                <h6 class="mb-0">libre</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-bed fa-3x text-info"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Chambre 2</p>
+                                <h6 class="mb-0">libre</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-ambulance fa-3x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Ambulance</p>
+                                <h6 class="mb-0">libre</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-ambulance fa-3x text-info"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Ambulance</p>
+                                <h6 class="mb-0">libre</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-bed fa-3x text-info"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Chambre 2</p>
-                            <h6 class="mb-0">libre</h6>
+            </div>
+            <!-- Sale & Revenue End -->
+
+            <!-- Sales Chart Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Statistiques des maladies</h6>
+                                <a href="#" class="text-warning">Afficher tous</a>
+                            </div>
+                            <canvas id="worldwide-sales"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-ambulance fa-3x text-warning"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Ambulance</p>
-                            <h6 class="mb-0">libre</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-ambulance fa-3x text-info"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Ambulance</p>
-                            <h6 class="mb-0">libre</h6>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Google map</h6>
+                                <a href="#" class="text-info">Afficher tous</a>
+                            </div>
+                            <canvas id="salse-revenue"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sale & Revenue End -->
 
-        <!-- Sales Chart Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="row g-4">
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Statistiques des maladies</h6>
-                            <a href="#" class="text-warning">Afficher tous</a>
-                        </div>
-                        <canvas id="worldwide-sales"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Google map</h6>
-                            <a href="#" class="text-info">Afficher tous</a>
-                        </div>
-                        <canvas id="salse-revenue"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="lib/chart/chart.min.js"></script>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-
-    <script src="js/main.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>

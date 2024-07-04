@@ -31,6 +31,10 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/input.css') }}" rel="stylesheet">
+
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -67,8 +71,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Accueil</a>
-                    <a href="#" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Employées</a>
-                    <a href="/pharmacie" class="nav-item nav-link"><i class="fa fa-pills me-2"></i>Pharmacie</a>
+                    <a href="/employee" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Employées</a>
+                    <a href="#" class="nav-item nav-link"><i class="fa fa-pills me-2"></i>Pharmacie</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Historiques</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -83,6 +87,7 @@
                 </div>
             </nav>
         </div>
+
         <!-- Content Start -->
         <div class="content">
             <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
@@ -174,73 +179,51 @@
                 </div>
             </div>
 
-            <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Liste des Employées</h6>
+                        <h6 class="mb-0">Liste des Médicaments</h6>
                         <button class="btn btn-outline-warning" onclick="openAddModal()">
-                            <i class="fa fa-user-plus me-2"></i>
-
+                            <!-- <i class="fa fa-user-plus me-2"></i> -->
+                            <i class="fas fa-pills plus me-2"></i>
                         </button>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0 text-center">
-                            <thead>
-                                <tr class="text-white">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Prenom</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Poste</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($emps as $emp)
-                                    <tr>
-                                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                        <td>
-                                            <img src="{{ asset('img/' . $emp->Image) }}" class="rounded-image">
-                                        </td>
-                                        <td>{{ $emp->Nom }}</td>
-                                        <td>{{ $emp->Prenom }}</td>
-                                        <td>{{ $emp->Phone }}</td>
-                                        <td>{{ $emp->Poste }}</td>
-                                        <td>{{ $emp->Email }}</td>
-                                        <td>
-                                            <button class="btn btn-outline-info"
-                                                onclick="openEditModal({{ json_encode($emp) }})">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <form action="{{ route('employees.destroy', $emp->id) }}" method="POST"
-                                                style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        @foreach($pharma as $pharmacie)
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
+                                <div class="card h-100 bg-transparent border-dark mx-auto" style="max-width: 18rem;">
+                                    <div class="d-flex justify-content-center"
+                                        style="height: 150px; width: 150px; margin-left:27%; overflow: hidden; margin-top: 12px;">
+                                        <img src="{{ asset('img/' . $pharmacie->Image) }}"
+                                            class="card-img-top rounded-circle img-fluid img-fluid img-thumbnail""
+                                             alt=" {{ $pharmacie->Nom }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nom: {{ $pharmacie->Nom }}</h5>
+                                        <p class="card-text">Quantité: {{ $pharmacie->Quantite }}</p>
+                                        <p class="card-text">Prix: {{ $pharmacie->Prix }}</p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <button class="btn btn-outline-info"
+                                            onclick="openEditModal({{ json_encode($pharmacie) }})">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
 
-            <!-- The Modal -->
+
+            <!-- //Modal Ajouter et Modifier un medicament -->
             <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="employeeModalLabel">Ajouter/Modifier un Employé</h5>
+                            <h5 class="modal-title" id="employeeModalLabel">Ajouter/Modifier un Medicame</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -255,7 +238,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form id="employeeForm" action="{{ route('employees.store') }}" method="POST"
+                            <form id="employeeForm" action="{{ route('pharmacie.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="employee_id" name="employee_id">
@@ -269,96 +252,86 @@
                                     </div>
                                     <div id="imagePreview" class="mt-2"></div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="Nom">Nom</label>
-                                    <input type="text" class="form-control" id="Nom" name="Nom" required>
+                                <div class="form_div">
+                                    <input type="text" class="form_input" id="Nom" placeholder="" name="Nom" required>
+                                    <label for="Nom" class="form_label text-yellow">Nom .....</label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="Prenom">Prénom</label>
-                                    <input type="text" class="form-control" id="Prenom" name="Prenom" required>
+                                <div class="form_div">
+                                    <input type="text" class="form_input" id="Quantite" placeholder="" name="Quantite"
+                                        required>
+                                    <label for="Quantite" class="form_label text-yellow">Quantité .....</label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="Phone">Téléphone</label>
-                                    <input type="text" class="form-control" id="Phone" name="Phone" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Poste">Poste</label>
-                                    <input type="text" class="form-control" id="Poste" name="Poste" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Email">Email</label>
-                                    <input type="email" class="form-control" id="Email" name="Email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="MotDePasse">Mot de Passe</label>
-                                    <input type="password" class="form-control" id="MotDePasse" name="MotDePasse">
+                                <div class="form_div">
+                                    <input type="text" class="form_input" id="Prix" placeholder="" name="Prix" required>
+                                    <label for="Prix" class="form_label text-yellow">Prix</label>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-outline-info">Enregistrer</button>
                                 <button type="button" class="btn btn-outline-danger"
                                     data-dismiss="modal">Quitter</button>
+                            </form>
+
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                bsCustomFileInput.init();
-            });
+            <!-- fonction JavaScript pour la méthode Ajouteret mmodifier  -->
 
-            function previewImage(event) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var output = '<img src="' + reader.result + '" class="img-fluid img-thumbnail">';
-                    document.getElementById('imagePreview').innerHTML = output;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-            function openAddModal() {
-                $('#employeeForm').attr('action', '{{ route('employees.store') }}');
-                $('#employeeForm').trigger("reset");
-                $('#employee_id').val('');
-                $('#employeeModalLabel').text('Ajouter un Employé');
-                $('#employeeModal').modal('show');
-            }
+            <script>
+                $(document).ready(function () {
+                    bsCustomFileInput.init();
+                });
 
-            function openEditModal(employee) {
-                $('#employeeForm').attr('action', '{{ route('employees.update', '') }}/' + employee.id);
-                $('#employeeForm').find('input[name="_method"]').remove();
-                $('#employeeForm').prepend('<input type="hidden" name="_method" value="PUT">');
-                $('#Nom').val(employee.Nom);
-                $('#Prenom').val(employee.Prenom);
-                $('#Phone').val(employee.Phone);
-                $('#Poste').val(employee.Poste);
-                $('#Email').val(employee.Email);
-                $('#employee_id').val(employee.id);
-                $('#employeeModalLabel').text('Modifier un Employé');
+                function previewImage(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = '<img src="' + reader.result + '" class="img-fluid img-thumbnail">';
+                        document.getElementById('imagePreview').innerHTML = output;
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+                function openAddModal() {
+                    $('#employeeForm').attr('action', '{{ route('pharmacie.store') }}');
+                    $('#employeeForm').trigger("reset");
+                    $('#employee_id').val('');
+                    $('#employeeModalLabel').text('Ajouter un Medicament');
+                    $('#employeeModal').modal('show');
+                }
 
-                var imagePreview = '<img src="{{ asset('img/') }}/' + employee.Image + '" class="img-fluid img-thumbnail">';
-                $('#imagePreview').html(imagePreview);
+                function openEditModal(pharmaci) {
+                    $('#employeeForm').attr('action', '{{ route('pharmacie.update', '') }}/' + pharmaci.id);
+                    $('#employeeForm').find('input[name="_method"]').remove();
+                    $('#employeeForm').prepend('<input type="hidden" name="_method" value="PUT">');
+                    $('#Nom').val(pharmaci.Nom);
+                    $('#Quantite').val(pharmaci.Quantite);
+                    $('#Prix').val(pharmaci.Prix);
+                    $('#employee_id').val(pharmaci.id);
+                    $('#employeeModalLabel').text('Modifier un Médicament');
 
-                $('#employeeModal').modal('show');
-            }
+                    var imagePreview = '<img src="{{ asset('img/') }}/' + pharmaci.Image + '" class="img-fluid img-thumbnail">';
+                    $('#imagePreview').html(imagePreview);
 
-        </script>
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
+                    $('#employeeModal').modal('show');
+                }
 
-        <script src="lib/chart/chart.min.js"></script>
 
-        <script src="js/main.js"></script>
+            </script>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"></script>
+
+            <script src="lib/chart/chart.min.js"></script>
+
+            <script src="js/main.js"></script>
 </body>
 
 </html>

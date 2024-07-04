@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployersController;
+use App\Http\Controllers\PharmacieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,11 @@ Route::get('/employee', [EmployersController::class, 'index'])->name('employees.
 Route::post('/employers', [EmployersController::class, 'store'])->name('employees.store');
 Route::put('/employers/{id}', [EmployersController::class, 'update'])->name('employees.update');
 Route::delete('/employers/{id}', [EmployersController::class, 'destroy'])->name('employees.destroy');
+
+//Pharmacie
+Route::get('/pharmacie', [PharmacieController::class, 'index'])->name('pharmacie.index');
+Route::post('/pharmacies', [PharmacieController::class, 'store'])->name('pharmacie.store');
+Route::put('/pharmacies/{id}', [PharmacieController::class, 'update'])->name('pharmacie.update');
+
 
 require __DIR__.'/auth.php';
