@@ -22,29 +22,29 @@
         </div>
         {{-- tabs and lists --}}
         <div class="m-body contacts-container">
-           {{-- Lists [Users/Group] --}}
-           {{-- ---------------- [ User Tab ] ---------------- --}}
-           <div class="show messenger-tab users-tab app-scroll" data-view="users">
-               {{-- Favorites --}}
-               <div class="favorites-section">
-                <p class="messenger-title"><span>Favorites</span></p>
-                <div class="messenger-favorites app-scroll-hidden"></div>
-               </div>
-               {{-- Saved Messages --}}
-               <p class="messenger-title"><span>Your Space</span></p>
-               {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
-               {{-- Contact --}}
-               <p class="messenger-title"><span>Voir tous les Messages</span></p>
-               <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
-           </div>
-             {{-- ---------------- [ Search Tab ] ---------------- --}}
-           <div class="messenger-tab search-tab app-scroll" data-view="search">
+            {{-- Lists [Users/Group] --}}
+            {{-- ---------------- [ User Tab ] ---------------- --}}
+            <div class="show messenger-tab users-tab app-scroll" data-view="users">
+                {{-- Favorites --}}
+                <div class="favorites-section">
+                    <p class="messenger-title"><span>Favorites</span></p>
+                    <div class="messenger-favorites app-scroll-hidden"></div>
+                </div>
+                {{-- Saved Messages --}}
+                <p class="messenger-title"><span>Your Space</span></p>
+                {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+                {{-- Contact --}}
+                <p class="messenger-title"><span>Voir tous les Messages</span></p>
+                <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
+            </div>
+            {{-- ---------------- [ Search Tab ] ---------------- --}}
+            <div class="messenger-tab search-tab app-scroll" data-view="search">
                 {{-- items --}}
                 <p class="messenger-title"><span>Search</span></p>
                 <div class="search-records">
                     <p class="message-hint center-el"><span>Type to search..</span></p>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
 
@@ -56,15 +56,30 @@
                 {{-- header back button, avatar and user name --}}
                 <div class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
-                    <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
+                    <div class="avatar av-s header-avatar"
+                        style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
                     <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/dashboard"><i class="fas fa-home"></i></a>
+                    @if(Auth::check())
+                        @if(Auth::user()->user_type == 'client')
+                            <a href="{{ route('listedoc') }}"><i class="fas fa-home"></i></a>
+                        @elseif(Auth::user()->user_type == 'admin')
+                        <a href="{{ route('dashboard') }}"><i class="fas fa-home"></i></a>
+                        @endif
+                    @endif
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
                 </nav>
             </nav>
             {{-- Internet connection --}}
@@ -79,7 +94,7 @@
         <div class="m-body messages-container app-scroll">
             <div class="messages">
                 <p class="message-hint center-el"><span>
-                Démarrer la discussion maintenant</span></p>
+                        Démarrer la discussion maintenant</span></p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">

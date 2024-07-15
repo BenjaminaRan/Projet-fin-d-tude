@@ -27,6 +27,15 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // Ensure the user type matches
+        $user = Auth::user();
+        if ($user && $user->user_type !== $request->user_type) {
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'le type ne correspond pas.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);

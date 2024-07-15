@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pharmacie extends Model
+class Caisse extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'Image',
-        'Nom',
-        'Quantite',
-        'Prix',
+        'money',
     ];
 }

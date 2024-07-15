@@ -56,4 +56,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+
+
+                Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+
+                // Routes pour client
+                Route::get('/client/dashboard', 'ClientController@dashboard')->name('client.dashboard');
 });

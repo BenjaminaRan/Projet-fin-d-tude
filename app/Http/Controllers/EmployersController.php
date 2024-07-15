@@ -21,6 +21,23 @@ class EmployersController extends Controller
         $emps = Employers::all();
         return view('liste', compact('emps'));
     }
+
+
+    public function client()
+    {
+        // Redirection vers la vue welcome
+        return view('client');
+    }
+    //maka dokotera
+    public function listedocteur()
+    {
+        $docteur = Employers::where('Poste', 'docteur')->get();
+        $infirmieres = Employers::where('Poste', 'Infirmière')->get();
+        return view('welcome', compact('docteur', 'infirmieres'));
+    }   
+    
+
+
     public function store(Request $request)
     {
         $rules = [

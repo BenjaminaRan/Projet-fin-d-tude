@@ -2,16 +2,11 @@
 
 
 <html lang="en">
+
 <head>
 
-     <title>Health - Medical Website Template</title>
-<!--
+     <title>Hôpital</title>
 
-Template 2098 Health
-
-http://www.tooplate.com/view/2098-health
-
--->
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
      <meta name="description" content="">
@@ -27,8 +22,18 @@ http://www.tooplate.com/view/2098-health
 
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="Stylecss/tooplate-style.css">
+     <style>
+     
+     
+        .dropdown-menu-dark {
+            background-color: #343a40; 
+            color: orange; 
+        }
+        
+    </style>
 
 </head>
+
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
      <!-- PRE LOADER -->
@@ -36,24 +41,21 @@ http://www.tooplate.com/view/2098-health
           <div class="spinner">
 
                <span class="spinner-rotate"></span>
-               
+
           </div>
      </section>
 
-
      <!-- HEADER -->
      <header>
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-4 col-sm-5">
-                         <p>Welcome to a Professional Health Care</p>
+                    <div class="col-md-4 col-sm-4">
+                         <p>Bienvenue dans ce site hôpital</p>
                     </div>
-                         
+
                     <div class="col-md-8 col-sm-7 text-align-right">
                          <span class="phone-icon"><i class="fa fa-phone"></i> 0381439635</span>
-                         <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                         <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">benjaminarandriantsoa@gmail.com</a></span>
+                         <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> (Lundi-Vendredi)</span>
+                         <span class="email-icon"><i class="fa fa-envelope-o"></i> <a
+                                   href="#">benjaminarandriantsoa@gmail.com</a></span>
                     </div>
 
                </div>
@@ -73,247 +75,223 @@ http://www.tooplate.com/view/2098-health
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
+                    <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ôpital  Mangamila</a>
                </div>
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="#top" class="smoothScroll">Home</a></li>
-                         <li><a href="#about" class="smoothScroll">About Us</a></li>
-                         <li><a href="#team" class="smoothScroll">Doctors</a></li>
-                         <li><a href="#news" class="smoothScroll">News</a></li>
-                         <li><a href="#google-map" class="smoothScroll">Contact</a></li>
-                         <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
+                    <li><a href="#google-map" class="smoothScroll "style="color:chocolate">Lieux</a></li>
+                    <li class="appointment-btn"><a href="#appointment">Rendez-vous</a></li>
+                         <!-- <li><a href="#team" class="smoothScroll">Doctors</a></li> -->
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle smoothScroll" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Se Connecter <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            @if (Route::has('login'))
+                            @auth
+                                        @if (auth()->user()->user_type == 'client')
+                                             <li><a href="{{ route('chatify') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Messages</a></li>
+                                        @elseif (auth()->user()->user_type == 'admin')
+                                             <li><a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a></li>
+                                        @endif
+                                   @else
+                                        <li><a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a></li>
+                                        @if (Route::has('register'))
+                                             <li><a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a></li>
+                                        @endif
+                                   @endauth
+                            @endif
+                        </ul>
+                    </li>
+                    
+                    </div>
+                        </ul>
+                    </li>
+                       
                     </ul>
                </div>
 
           </div>
      </section>
-
-
      <!-- HOME -->
      <section id="home" class="slider" data-stellar-background-ratio="0.5">
           <div class="container">
                <div class="row">
 
-                         <div class="owl-carousel owl-theme">
-                              <div class="item item-first">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Let's make your life happier</h3>
-                                             <h1>Healthy Living</h1>
-                                             <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our Doctors</a>
-                                        </div>
-                                   </div>
-                              </div>
-
-                              <div class="item item-second">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Aenean luctus lobortis tellus</h3>
-                                             <h1>New Lifestyle</h1>
-                                             <a href="#about" class="section-btn btn btn-default btn-gray smoothScroll">More About Us</a>
-                                        </div>
-                                   </div>
-                              </div>
-
-                              <div class="item item-third">
-                                   <div class="caption">
-                                        <div class="col-md-offset-1 col-md-10">
-                                             <h3>Pellentesque nec libero nisi</h3>
-                                             <h1>Your Health Benefits</h1>
-                                             <a href="#news" class="section-btn btn btn-default btn-blue smoothScroll">Read Stories</a>
-                                        </div>
+                    <div class="owl-carousel owl-theme">
+                         <div class="item item-first">
+                              <div class="caption">
+                                   <div class="col-md-offset-1 col-md-10">
+                                        <h3>Let's make your life happier</h3>
+                                        <h1>Healthy Living</h1>
+                                        <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our
+                                             Doctors</a>
                                    </div>
                               </div>
                          </div>
 
-               </div>
-          </div>
-     </section>
-
-
-     <!-- ABOUT -->
-     <section id="about">
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-6 col-sm-6">
-                         <div class="about-info">
-                              <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i class="fa fa-h-square"></i>ealth Center</h2>
-                              <div class="wow fadeInUp" data-wow-delay="0.8s">
-                                   <p>Aenean luctus lobortis tellus, vel ornare enim molestie condimentum. Curabitur lacinia nisi vitae velit volutpat venenatis.</p>
-                                   <p>Sed a dignissim lacus. Quisque fermentum est non orci commodo, a luctus urna mattis. Ut placerat, diam a tempus vehicula.</p>
+                         <div class="item item-second">
+                              <div class="caption">
+                                   <div class="col-md-offset-1 col-md-10">
+                                        <h3>Aenean luctus lobortis tellus</h3>
+                                        <h1>New Lifestyle</h1>
+                                        <a href="#about" class="section-btn btn btn-default btn-gray smoothScroll">More
+                                             About Us</a>
+                                   </div>
                               </div>
-                              <figure class="profile wow fadeInUp" data-wow-delay="1s">
-                                   <img src="images/author-image.jpg" class="img-responsive" alt="">
-                                   <figcaption>
-                                        <h3>Dr. Neil Jackson</h3>
-                                        <p>General Principal</p>
-                                   </figcaption>
-                              </figure>
+                         </div>
+
+                         <div class="item item-third">
+                              <div class="caption">
+                                   <div class="col-md-offset-1 col-md-10">
+                                        <h3>Pellentesque nec libero nisi</h3>
+                                        <h1>Your Health Benefits</h1>
+                                        <a href="#news" class="section-btn btn btn-default btn-blue smoothScroll">Read
+                                             Stories</a>
+                                   </div>
+                              </div>
                          </div>
                     </div>
-                    
+
                </div>
           </div>
      </section>
 
-
-     <!-- NEWS -->
      <section id="news" data-stellar-background-ratio="2.5">
-          <div class="container">
-               <div class="row">
+    <div class="container">
+        <div class="row">
 
-                    <div class="col-md-12 col-sm-12">
-                         <!-- SECTION TITLE -->
-                         <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                              <h2>Latest News</h2>
-                         </div>
-                    </div>
+            <div class="col-md-12 col-sm-12">
+                <!-- SECTION TITLE -->
+                <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                    <h2>Listes des employées</h2>
+                </div>
+            </div>
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
+            @if ($docteur->count() > 0)
+                @foreach ($docteur as $docteur)
+                <div class="col-md-4 col-sm-6">
                          <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
                               <a href="news-detail.html">
-                                   <img src="images/news-image1.jpg" class="img-responsive" alt="">
-                              </a>
-                              <div class="news-info">
-                                   <span>19 Avril 2021</span>
-                                   <h3><a href="news-detail.html">About Amazing Technology</a></h3>
-                                   <p>Maecenas risus neque, placerat volutpat tempor ut, vehicula et felis.</p>
-                                   <div class="author">
-                                        <img src="img/1719911162_mino.png" class="img-responsive" alt="">
-                                        <div class="author-info">
-                                             <h5>Maminjanahery Mino</h5>
-                                             <p>Infirmière</p>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
+                            <img src="{{ asset('img/' . $docteur->Image) }}"class="img-responsive">
+                        </a>
+                        <div class="news-info">
+                            <h3><a href="news-detail.html">{{ $docteur->Nom }} {{ $docteur->Prenom }}</a></h3>
+                            <p>{{ $docteur->Poste }}</p>
+                        </div>
                     </div>
+                </div>
+                @endforeach
+            @else
+                <p>Aucun docteur trouvé.</p>
+            @endif
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
-                         <div class="news-thumb wow fadeInUp" data-wow-delay="0.6s">
-                              <a href="news-detail.html">
-                                   <img src="images/news-image2.jpg" class="img-responsive" alt="">
-                              </a>
-                              <div class="news-info">
-                                   <span>28 Mars 2020</span>
-                                   <h3><a href="news-detail.html">Introducing a new healing process</a></h3>
-                                   <p>Fusce vel sem finibus, rhoncus massa non, aliquam velit. Nam et est ligula.</p>
-                                   <div class="author">
-                                        <img src="img/1718795717_417405863_1149392549722324_5881897177985257106_n.jpg" class="img-responsive" alt="">
-                                        <div class="author-info">
-                                             <h5>Antso Randrianarivola</h5>
-                                             <p>Docteur Général</p>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
+            @if ($infirmieres->count() > 0)
+                @foreach ($infirmieres as $infirmiere)
+                <div class="col-md-4 col-sm-6">
+                    <div class="news-thumb wow fadeInUp" data-wow-delay="0.6s">
+                        <a href="news-detail.html">
+                            <img src="{{ asset('img/' . $infirmiere->Image) }}"class="img-responsive">
+                        </a>
+                        <div class="news-info">
+                        <span>19 Avril 2021</span>
+                            <h3>{{ $infirmiere->Nom }} {{ $infirmiere->Prenom }}</h3>
+                            <p>{{ $infirmiere->Poste }}</p>
+                            <div class="author">
+                            <a href="#">
+                            <img src="{{ asset('img/' . $infirmiere->Image) }}"class="img-responsive">
+                           
+                            <div class="author-info">
+
+                            <h5>{{ $infirmiere->Nom }}</h5>
+                          <p>  {{ $infirmiere->Prenom }}</p> 
+                        </div>
+
+                        </div>
+                        </a>
+
+                        </div>
                     </div>
+                </div>
+                @endforeach
+            @else
+                <p>Aucune infirmière trouvée.</p>
+            @endif
 
-                    <div class="col-md-4 col-sm-6">
-                         <!-- NEWS THUMB -->
-                         <div class="news-thumb wow fadeInUp" data-wow-delay="0.8s">
-                              <a href="news-detail.html">
-                                   <img src="images/news-image3.jpg" class="img-responsive" alt="">
-                              </a>
-                              <div class="news-info">
-                                   <span>18 octobre 2024</span>
-                                   <h3><a href="news-detail.html">Review Annual Medical Research</a></h3>
-                                   <p>Vivamus non nulla semper diam cursus maximus. Pellentesque dignissim.</p>
-                                   <div class="author">
-                                        <img src="img/1718696244_433690330_739110841737997_5296405525387113936_n.jpg" class="img-responsive" alt="">
-                                        <div class="author-info">
-                                             <h5>Mitia Rabehaja</h5>
-                                             <p>Infirmière</p>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </section>
+        </div>
+    </div>
+</section>
 
 
-     <!-- MAKE AN APPOINTMENT -->
-     <section id="appointment" data-stellar-background-ratio="3">
-          <div class="container">
-               <div class="row">
+<!-- MAKE AN APPOINTMENT -->
+<section id="appointment" data-stellar-background-ratio="3">
+    <div class="container">
+        <div class="row">
+            @auth
+                <div class="col-md-12">
+                    <h4>Il y a un utilisateur connecté</h4>
+                </div>
+            @else
+                <div class="col-md-6 col-sm-6">
+                @if (isset($docteur))
+                <img src="{{ asset('img/' . $docteur->Image) }}" class="img-responsive" alt="Image de l'employé docteur"   style="border-radius: 15px;">
+                @else
+                              <p>Aucun employé "docteur" trouvé.</p>
+                         @endif
 
-                    <div class="col-md-6 col-sm-6">
-                         <img src="images/appointment-image.jpg" class="img-responsive" alt="">
-                    </div>
+                </div>
 
-                    <div class="col-md-6 col-sm-6">
-                         <!-- CONTACT FORM HERE -->
-                         <form id="appointment-form" role="form" method="post" action="#">
+                <div class="col-md-6 col-sm-6">
+                    <form method="POST" action="{{ route('register') }}" class="appointment-form">
+                        @csrf
+                        <h4>Inscrire maintenant</h4>
+                        <div class="col-md-12 col-sm-12">
+                            <label for="user_type">User Type</label>
+                            <input type="text" class="form-control" id="user_type" name="user_type" value="client" readonly>
+                        </div>
+        
+                        <div class="wow fadeInUp" data-wow-delay="0.8s">
+                            <div class="col-md-12 col-sm-12">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                            </div>
 
-                              <!-- SECTION TITLE -->
-                              <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                                   <h2>Make an appointment</h2>
-                              </div>
+                            <div class="col-md-12 col-sm-12">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                            </div>
 
-                              <div class="wow fadeInUp" data-wow-delay="0.8s">
-                                   <div class="col-md-6 col-sm-6">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
-                                   </div>
+                            <div class="col-md-12 col-sm-12">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            </div>
 
-                                   <div class="col-md-6 col-sm-6">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
-                                   </div>
+                            <div class="col-md-12 col-sm-12">
+                                <label for="password_confirmation">Confirm Password</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                            </div>
 
-                                   <div class="col-md-6 col-sm-6">
-                                        <label for="date">Select Date</label>
-                                        <input type="date" name="date" value="" class="form-control">
-                                   </div>
+                            <div class="col-md-12 col-sm-12">
+                                <button type="submit" class="form-control btn btn-primary" id="register-submit" name="register-submit">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            @endauth
+        </div>
+    </div>
+</section>
 
-                                   <div class="col-md-6 col-sm-6">
-                                        <label for="select">Select Department</label>
-                                        <select class="form-control">
-                                             <option>General Health</option>
-                                             <option>Cardiology</option>
-                                             <option>Dental</option>
-                                             <option>Medical Research</option>
-                                        </select>
-                                   </div>
 
-                                   <div class="col-md-12 col-sm-12">
-                                        <label for="telephone">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
-                                        <label for="Message">Additional Message</label>
-                                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Message"></textarea>
-                                        <button type="submit" class="form-control" id="cf-submit" name="submit">S'inscrire maintenant</button>
-                                   </div>
-                              </div>
-                        </form>
-                    </div>
-
-               </div>
-          </div>
-     </section>
-
-<br><br><br>
-<br><br><br>
+     <br><br><br>
+     <br><br><br>
      <!-- GOOGLE MAP -->
      <section id="google-map">
-     <!-- How to change your own map point
-            1. Go to Google Maps
-            2. Click on your location point
-            3. Click "Share" and choose "Embed map" tab
-            4. Copy only URL and paste it within the src="" field below
-	-->
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24364635.74135334!2d43.55968222484929!3d-18.766947299937582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x21f07ddfdfac6d67%3A0x8a19d68f0b5d5af5!2sMadagascar!5e0!3m2!1sen!2sth!4v1688313012423" width="50%" height="350"  frameborder="0" style="border-radius:15px" allowfullscreen></iframe>
+          <iframe
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24364635.74135334!2d43.55968222484929!3d-18.766947299937582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x21f07ddfdfac6d67%3A0x8a19d68f0b5d5af5!2sMadagascar!5e0!3m2!1sen!2sth!4v1688313012423"
+               width="50%" height="350" frameborder="0" style="border-radius:15px" allowfullscreen></iframe>
 
-     </section>           
-
+     </section>
 
      <!-- FOOTER -->
      <footer data-stellar-background-ratio="5">
@@ -321,9 +299,10 @@ http://www.tooplate.com/view/2098-health
                <div class="row">
 
                     <div class="col-md-4 col-sm-4">
-                         <div class="footer-thumb"> 
+                         <div class="footer-thumb">
                               <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
-                              <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+                              <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu
+                                   elit consequat ultricies.</p>
 
                               <div class="contact-info">
                                    <p><i class="fa fa-phone"></i> 010-070-0170</p>
@@ -332,15 +311,17 @@ http://www.tooplate.com/view/2098-health
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-4"> 
-                         <div class="footer-thumb"> 
+                    <div class="col-md-4 col-sm-4">
+                         <div class="footer-thumb">
                               <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
                               <div class="latest-stories">
                                    <div class="stories-image">
                                         <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
                                    </div>
                                    <div class="stories-info">
-                                        <a href="#"><h5>Amazing Technology</h5></a>
+                                        <a href="#">
+                                             <h5>Amazing Technology</h5>
+                                        </a>
                                         <span>March 08, 2018</span>
                                    </div>
                               </div>
@@ -350,24 +331,27 @@ http://www.tooplate.com/view/2098-health
                                         <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
                                    </div>
                                    <div class="stories-info">
-                                        <a href="#"><h5>New Healing Process</h5></a>
+                                        <a href="#">
+                                             <h5>New Healing Process</h5>
+                                        </a>
                                         <span>February 20, 2018</span>
                                    </div>
                               </div>
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-4"> 
+                    <div class="col-md-4 col-sm-4">
                          <div class="footer-thumb">
                               <div class="opening-hours">
                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
                                    <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
                                    <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
                                    <p>Sunday <span>Closed</span></p>
-                              </div> 
+                              </div>
 
                               <ul class="social-icon">
-                                   <li><a href="https://www.facebook.com/tooplate" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                   <li><a href="https://www.facebook.com/tooplate" class="fa fa-facebook-square"
+                                             attr="facebook icon"></a></li>
                                    <li><a href="#" class="fa fa-twitter"></a></li>
                                    <li><a href="#" class="fa fa-instagram"></a></li>
                               </ul>
@@ -376,14 +360,14 @@ http://www.tooplate.com/view/2098-health
 
                     <div class="col-md-12 col-sm-12 border-top">
                          <div class="col-md-4 col-sm-6">
-                              <div class="copyright-text"> 
-                                   <p>Copyright &copy; 2017 Your Company 
-                                   
-                                   | Design: <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+                              <div class="copyright-text">
+                                   <p>Copyright &copy; 2017 Your Company
+
+                                        | Design: <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
                               </div>
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <div class="footer-link"> 
+                              <div class="footer-link">
                                    <a href="#">Laboratory Tests</a>
                                    <a href="#">Departments</a>
                                    <a href="#">Insurance Policy</a>
@@ -391,12 +375,13 @@ http://www.tooplate.com/view/2098-health
                               </div>
                          </div>
                          <div class="col-md-2 col-sm-2 text-align-center">
-                              <div class="angle-up-btn"> 
-                                  <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
+                              <div class="angle-up-btn">
+                                   <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i
+                                             class="fa fa-angle-up"></i></a>
                               </div>
-                         </div>   
+                         </div>
                     </div>
-                    
+
                </div>
           </div>
      </footer>
@@ -412,4 +397,5 @@ http://www.tooplate.com/view/2098-health
      <script src="funjs/arriere.js"></script>
 
 </body>
+
 </html>
